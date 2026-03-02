@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Freelance Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #a855f7;
+            --bg: #030712;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1000px; /* Memberikan efek kedalaman 3D */
+        }
+
+        /* Kartu 3D Modern */
+        .card-3d {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-3d:hover {
+            box-shadow: 0 35px 60px -15px rgba(99, 102, 241, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            transform: translateZ(50px); /* Teks terlihat melayang ke depan */
+        }
+
+        p.tagline {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: translateZ(30px);
+        }
+
+        /* Tombol Modern & Canggih */
+        .btn-container {
+            transform: translateZ(60px);
+        }
+
+        .btn-launch {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-launch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-launch span {
+            position: relative;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+
+        /* Efek Kilatan pada Tombol */
+        .btn-launch::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .btn-launch:hover::after {
+            left: 120%;
+        }
+
+        /* Motivasi Section */
+        .motivation {
+            margin-top: 40px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transform: translateZ(40px);
+        }
+
+        .highlight {
+            color: #f472b6;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .secure-badge {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transform: translateZ(20px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-3d" id="card">
+        <p class="tagline">Exclusive Access</p>
+        <h1>Level Up!</h1>
+        
+        <div class="btn-container">
+            <button class="btn-launch" onclick="launchExperience()">
+                <span>KERJA FREELANCE</span>
+            </button>
+        </div>
+
+        <div class="motivation">
+            Isi waktu luang mu, belajar lah untuk mencari uang tambahan. 
+            Walaupun sedikit, ini akan menjadi <span class="highlight">pengalaman berharga</span> untuk masa depanmu.
+        </div>
+
+        <div class="secure-badge">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            </svg>
+            Sistem Terverifikasi & Aman
+        </div>
+    </div>
+
+    <script>
+        // Efek Gerakan 3D Mengikuti Mouse
+        const card = document.getElementById('card');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Script untuk Link Referral yang Aman
+        function launchExperience() {
+            // Link referral bersifat permanen dalam script ini sesuai permintaanmu
+            const secureLink = "https://buzzcuan.id/register?r=REF2DB4EB9D";
+            window.open(secureLink, "_blank");
+        }
+    </script>
+</body>
+</html>
